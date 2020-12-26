@@ -157,16 +157,35 @@ pipeline
                     //gcloud container clusters get-credentials cluster-grupo14 --ZONE us-west3-b
                     sh 'export PROJECT_ID=practica3-sa'
 
-                    echo 'Etiquetando contenedor'
+                    echo 'Etiquetando contenedor usuario'
                     sh 'docker tag image-microservicio-usuario:latest gcr.io/practica3-sa/microservicio-usuario-image:latest'
 
-                    echo 'Guardando el contenedor en el registro'
-                    //sh 'gcloud auth activate-service-account devops@practica3-sa.iam.gserviceaccount.com --key-file=/bitnami/jenkins/jenkins_home/credentials.json'
-                    //sh 'gcloud auth configure-docker'
-                    sh 'docker push gcr.io/practica3-sa/microservicio-usuario-image:latest'   
-                                  
+                    echo 'Etiquetando contenedor producto'
+                    sh 'docker tag image-microservicio-producto:latest gcr.io/practica3-sa/microservicio-producto-image:latest'                    
 
-                    echo 'Registrando el contenedor del microservicio usuario'
+                    echo 'Etiquetando contenedor carrito'
+                    sh 'docker tag image-microservicio-carrito:latest gcr.io/practica3-sa/microservicio-carrito-image:latest'      
+
+                    echo 'Etiquetando contenedor compra'
+                    sh 'docker tag image-microservicio-compra:latest gcr.io/practica3-sa/microservicio-compra-image:latest'    
+
+                    echo 'Etiquetando contenedor facturacion'
+                    sh 'docker tag image-microservicio-facturacion:latest gcr.io/practica3-sa/microservicio-facturacion-image:latest'   
+
+                    echo 'Etiquetando contenedor subasta'
+                    sh 'docker tag image-microservicio-subasta:latest gcr.io/practica3-sa/microservicio-subasta-image:latest'                                                                       
+
+                    echo 'Nos logeamos para poder enviar nuestros contenedores en container register'
+                    sh 'docker login -u _json_key -p "$(cat /home/g2616501300304/keyfile.json)" https://gcr.io'
+
+                    sh 'docker push gcr.io/practica3-sa/microservicio-usuario-image:latest'   
+                    sh 'docker push gcr.io/practica3-sa/microservicio-producto-image:latest' 
+                    sh 'docker push gcr.io/practica3-sa/microservicio-carrito-image:latest' 
+                    sh 'docker push gcr.io/practica3-sa/microservicio-compra-image:latest' 
+                    sh 'docker push gcr.io/practica3-sa/microservicio-facturacion-image:latest' 
+                    sh 'docker push gcr.io/practica3-sa/microservicio-subasta-image:latest' 
+                                  
+                    echo 'Registro realizado con éxito. '
                 }                                                            
             }
         }
