@@ -153,17 +153,17 @@ pipeline
                 dir("microservicio-usuario")
                 {                    
                     //echo 'Borrando ultima version del contenedor'
-                    //sh 'gcloud container images delete gcr.io/focal-lens-299204/microservicio-usuario-image:v1 --force-delete-tags'
+                    //sh 'gcloud container images delete gcr.io/practica3-sa/microservicio-usuario-image:v1 --force-delete-tags'
                     //gcloud container clusters get-credentials cluster-grupo14 --ZONE us-west3-b
-                    sh 'export PROJECT_ID=focal-lens-299204'
+                    sh 'export PROJECT_ID=practica3-sa'
 
                     echo 'Etiquetando contenedor'
-                    sh 'docker tag image-microservicio-usuario:latest gcr.io/focal-lens-299204/microservicio-usuario-image:latest'
+                    sh 'docker tag image-microservicio-usuario:latest gcr.io/practica3-sa/microservicio-usuario-image:latest'
 
                     echo 'Guardando el contenedor en el registro'
-                    //sh 'gcloud auth activate-service-account devops@focal-lens-299204.iam.gserviceaccount.com --key-file=/bitnami/jenkins/jenkins_home/credentials.json'
+                    //sh 'gcloud auth activate-service-account devops@practica3-sa.iam.gserviceaccount.com --key-file=/bitnami/jenkins/jenkins_home/credentials.json'
                     //sh 'gcloud auth configure-docker'
-                    sh 'docker push gcr.io/focal-lens-299204/microservicio-usuario-image:latest'   
+                    sh 'docker push gcr.io/practica3-sa/microservicio-usuario-image:latest'   
                                   
 
                     echo 'Registrando el contenedor del microservicio usuario'
@@ -188,14 +188,14 @@ pipeline
                 echo 'Configurando los servidores a través de ansible'
                 echo 'Configurando kluster en kubernetes'
 
-                sh 'export PROJECT_ID=focal-lens-299204'
-                sh 'gcloud config set project focal-lens-299204'
+                sh 'export PROJECT_ID=practica3-sa'
+                sh 'gcloud config set project practica3-sa'
                 sh 'gcloud config set compute/zone us-west3-b'
                 
                 //sh 'gcloud container clusters create cluster-grupo14  --machine-type=g1-small --disk-size=20G'
                 
                 sh 'kubectl delete deployment app-grupo14'
-                sh 'kubectl create deployment app-grupo14 --image=gcr.io/focal-lens-299204/microservicio-usuario-image:latest'
+                sh 'kubectl create deployment app-grupo14 --image=gcr.io/practica3-sa/microservicio-usuario-image:latest'
                 //sh 'kubectl create deployment app-grupo14 --image=microservicio-usuario-image:latest'
                 sh 'kubectl scale deployment app-grupo14 --replicas=3'
                 //sh 'kubectl autoscale deployment app-grupo14 --cpu-percent=80 --min=1 --max=4'
@@ -210,7 +210,7 @@ pipeline
             steps
             {
                 echo 'Desplegando nueva versión'                
-                sh 'kubectl set image deployment/app-grupo14 microservicio-usuario-image=gcr.io/focal-lens-299204/microservicio-usuario-image:latest'    
+                sh 'kubectl set image deployment/app-grupo14 microservicio-usuario-image=gcr.io/practica3-sa/microservicio-usuario-image:latest'    
 
                 echo 'Se ha desplegado un nueva versión.'
             }
