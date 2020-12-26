@@ -161,9 +161,9 @@ pipeline
                     sh 'docker tag image-microservicio-usuario:latest gcr.io/focal-lens-299204/microservicio-usuario-image:latest'
 
                     echo 'Guardando el contenedor en el registro'
-                    sh 'gcloud auth activate-service-account devops@focal-lens-299204.iam.gserviceaccount.com --key-file=/bitnami/jenkins/jenkins_home/credentials.json'
-                    sh 'gcloud auth configure-docker'
-                    //sh 'docker push gcr.io/focal-lens-299204/microservicio-usuario-image:latest'   
+                    //sh 'gcloud auth activate-service-account devops@focal-lens-299204.iam.gserviceaccount.com --key-file=/bitnami/jenkins/jenkins_home/credentials.json'
+                    //sh 'gcloud auth configure-docker'
+                    sh 'docker push gcr.io/focal-lens-299204/microservicio-usuario-image:latest'   
                                   
 
                     echo 'Registrando el contenedor del microservicio usuario'
