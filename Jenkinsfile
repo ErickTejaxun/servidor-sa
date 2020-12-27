@@ -177,6 +177,7 @@ pipeline
 
                     echo 'Nos logeamos para poder enviar nuestros contenedores en container register'
                     sh 'docker login -u _json_key -p "$(cat /home/g2616501300304/keyfile.json)" https://gcr.io'
+                    //sh 'docker login -u 1013130968812-compute@developer.gserviceaccount.com-p "$(cat /home/g2616501300304/keyfile.json)" https://gcr.io'
 
                     sh 'docker push gcr.io/practica3-sa/microservicio-usuario-image:latest'   
                     sh 'docker push gcr.io/practica3-sa/microservicio-producto-image:latest' 
@@ -207,16 +208,20 @@ pipeline
                 echo 'Configurando los servidores a través de ansible'
                 echo 'Configurando kluster en kubernetes'
 
-                sh 'export PROJECT_ID=practica3-sa'
+                //sh 'export PROJECT_ID=practica3-sa'
                 sh 'gcloud config set project practica3-sa'
-                sh 'gcloud config set compute/zone us-west3-b'
-                
+                sh 'gcloud config set compute/zone us-west3-a'
+
+
+                //sh 'ansible-playbook -i /home/jenkins/ansible_hosts /home/jenkins/deploy_cluster_kubernetes_gcp.yaml'
+
+                sh 'ansible-playbook -i /home/jenkins/ansible_hosts /home/jenkins/deploy_system.yaml'
                 //sh 'gcloud container clusters create cluster-grupo14  --machine-type=g1-small --disk-size=20G'
                 
-                sh 'kubectl delete deployment app-grupo14'
-                sh 'kubectl create deployment app-grupo14 --image=gcr.io/practica3-sa/microservicio-usuario-image:latest'
+                //sh 'kubectl delete deployment app-grupo14'
+                //sh 'kubectl create deployment app-grupo14 --image=gcr.io/practica3-sa/microservicio-usuario-image:latest'
                 //sh 'kubectl create deployment app-grupo14 --image=microservicio-usuario-image:latest'
-                sh 'kubectl scale deployment app-grupo14 --replicas=3'
+                //sh 'kubectl scale deployment app-grupo14 --replicas=3'
                 //sh 'kubectl autoscale deployment app-grupo14 --cpu-percent=80 --min=1 --max=4'
                 //sh 'kubectl expose deployment app-grupo14 --name=app-grupo14-service --type=LoadBalancer --port 80 --target-port 3000'   
                 //sh 'kubectl get service'             
