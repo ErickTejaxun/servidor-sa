@@ -26,7 +26,7 @@ pipeline
                     sh 'npm start'
                 }
 
-                dir("microservicio-producto") 
+                /*dir("microservicio-producto") 
                 {                    
                     sh 'npm install'                
                     sh 'npm start'
@@ -54,7 +54,7 @@ pipeline
                 {                    
                     sh 'npm install'                
                     sh 'npm start'
-                }                
+                }*/              
 
             }                                    
         }
@@ -70,7 +70,7 @@ pipeline
                     sh 'npm test'
                 }
 
-                dir("microservicio-producto")
+                /*dir("microservicio-producto")
                 {
                     sh 'npm test'
                 }
@@ -88,7 +88,7 @@ pipeline
                 dir("microservicio-facturacion")
                 {
                     sh 'npm test'
-                }
+                }*/
 
                 sh 'forever stopall'
             }
@@ -105,7 +105,7 @@ pipeline
                     sh 'docker build -t image-microservicio-usuario .'                                        
                 }                             
 
-                echo 'Creando la imagen docker de microservicio producto'
+                /*echo 'Creando la imagen docker de microservicio producto'
                 dir("microservicio-producto")
                 {
 
@@ -138,7 +138,8 @@ pipeline
                 {
 
                     sh 'docker build -t image-microservicio-subasta .'
-                } 
+                }
+                */ 
 
                 echo 'Creación de artefactos correcta'
             }
@@ -160,7 +161,7 @@ pipeline
                     echo 'Etiquetando contenedor usuario'
                     sh 'docker tag image-microservicio-usuario:latest gcr.io/practica3-sa/microservicio-usuario-image:latest'
 
-                    echo 'Etiquetando contenedor producto'
+                    /*echo 'Etiquetando contenedor producto'
                     sh 'docker tag image-microservicio-producto:latest gcr.io/practica3-sa/microservicio-producto-image:latest'                    
 
                     echo 'Etiquetando contenedor carrito'
@@ -174,17 +175,18 @@ pipeline
 
                     echo 'Etiquetando contenedor subasta'
                     sh 'docker tag image-microservicio-subasta:latest gcr.io/practica3-sa/microservicio-subasta-image:latest'                                                                       
-
+                    */
                     echo 'Nos logeamos para poder enviar nuestros contenedores en container register'
                     sh 'docker login -u _json_key -p "$(cat /home/g2616501300304/keyfile.json)" https://gcr.io'
                     //sh 'docker login -u 1013130968812-compute@developer.gserviceaccount.com-p "$(cat /home/g2616501300304/keyfile.json)" https://gcr.io'
 
                     sh 'docker push gcr.io/practica3-sa/microservicio-usuario-image:latest'   
-                    sh 'docker push gcr.io/practica3-sa/microservicio-producto-image:latest' 
+                    /*sh 'docker push gcr.io/practica3-sa/microservicio-producto-image:latest' 
                     sh 'docker push gcr.io/practica3-sa/microservicio-carrito-image:latest' 
                     sh 'docker push gcr.io/practica3-sa/microservicio-compra-image:latest' 
                     sh 'docker push gcr.io/practica3-sa/microservicio-facturacion-image:latest' 
                     sh 'docker push gcr.io/practica3-sa/microservicio-subasta-image:latest' 
+                    */
                                   
                     echo 'Registro realizado con éxito. '
                 }                                                            
@@ -208,7 +210,7 @@ pipeline
                 echo 'Configurando los servidores a través de ansible'
                 echo 'Configurando kluster en kubernetes'
 
-                //sh 'export PROJECT_ID=practica3-sa'
+                sh 'export PROJECT_ID=practica3-sa'
                 sh 'gcloud config set project practica3-sa'
                 sh 'gcloud config set compute/zone us-west3-a'
 
@@ -235,7 +237,6 @@ pipeline
             {
                 echo 'Desplegando nueva versión'                
                 sh 'kubectl set image deployment/app-grupo14 microservicio-usuario-image=gcr.io/practica3-sa/microservicio-usuario-image:latest'    
-
                 echo 'Se ha desplegado un nueva versión.'
             }
         }
