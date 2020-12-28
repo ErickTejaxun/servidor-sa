@@ -236,7 +236,7 @@ pipeline
             steps
             {
                 echo 'Desplegando nueva versión'                
-                sh 'ansible-playbook -i ~/kubernetes/ansible_hosts ~/kubernetes/update_system.yaml'
+                sh 'ansible-playbook -i /home/jenkins/kubernetes/ansible_hosts /home/jenkins/kubernetes/update_system.yaml'
                 echo 'Se ha desplegado un nueva versión.'
             }
         }
