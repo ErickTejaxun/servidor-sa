@@ -216,6 +216,7 @@ pipeline
 
 
                 //sh 'ansible-playbook -i /home/jenkins/ansible_hosts /home/jenkins/deploy_cluster_kubernetes_gcp.yaml'
+                sh 'ansible-playbook -i /home/jenkins/kubernetes/ansible_hosts /home/jenkins/kubernetes/deploy_system.yaml'
 
                 //sh 'ansible-playbook -i /home/jenkins/ansible_hosts /home/jenkins/deploy_system.yaml'
                 //sh 'gcloud container clusters create cluster-grupo14  --machine-type=g1-small --disk-size=20G'
