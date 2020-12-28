@@ -237,6 +237,7 @@ pipeline
             steps
             {
                 echo 'Desplegando nueva versión'                
+                //kubectl set image deployment/app-grupo14 microservicio-usuario-image=gcr.io/practica3-sa/microservicio-usuario-image:latest
                 sh 'ansible-playbook -i /home/jenkins/kubernetes/ansible_hosts /home/jenkins/kubernetes/update_system.yaml'
                 echo 'Se ha desplegado un nueva versión.'
             }
