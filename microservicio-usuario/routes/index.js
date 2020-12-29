@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const conn = require('../conexion');
 
 router.get('/', (req, res) => {
     let date_ob = new Date();
