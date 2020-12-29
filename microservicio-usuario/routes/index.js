@@ -4,7 +4,7 @@ const conn = require('../conexion');
 
 router.get('/', (req, res) => {
     let date_ob = new Date();
-    res.send("Version 0.0.0.xxxxyyyy" );
+    res.send("Version 0.0.0.xxxxyyyya" );
 });
 
 module.exports = router;
@@ -94,5 +94,3 @@ router.post('/registrar-proveedor', (req, res) => {
         }
     });
 });
-
-module.exports = router;
