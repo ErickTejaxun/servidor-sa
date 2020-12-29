@@ -2,9 +2,11 @@ const mysql = require('mysql');
 
 const conn = mysql.createPool({
     host: 'us-cdbr-east-02.cleardb.com',
-    user: 'baa4e1dd95ab72',
-    password: '71bcc7d1',
-    database: 'heroku_6d4806f4a1447f9'
+    user: 'b4061bbc2d1d31',
+    password: '967b1865',
+    database: 'heroku_2f69a0efed0e2f4'
 });
+
+
 
 module.exports = conn;
