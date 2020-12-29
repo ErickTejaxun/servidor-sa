@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.send("Inicio");
+    let date_ob = new Date();
+    res.send("Version 0.0.0.ddfalskjalsdfkla" );
 });
 
 module.exports = router;

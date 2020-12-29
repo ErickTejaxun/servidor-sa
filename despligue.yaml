@@ -1,0 +1,41 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "app"
+  namespace: "default"
+  labels:
+    app: "app"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "app"
+  template:
+    metadata:
+      labels:
+        app: "app"
+    spec:
+      containers:
+      - name: "microservicio-usuario-image-1"
+        image: "gcr.io/focal-lens-299204/microservicio-usuario-image:v1"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "app-hpa-xo7w"
+  namespace: "default"
+  labels:
+    app: "app"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "app"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 80
