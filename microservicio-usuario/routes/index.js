@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     res.send("Version 0.0.0.xxxxyyyya" );
 });
 
-module.exports = router;
+
 
 /*El login se probo en postman con esta cadena --Eliu
 {
@@ -94,3 +94,5 @@ router.post('/registrar-proveedor', (req, res) => {
         }
     });
 });
+
+module.exports = router;
