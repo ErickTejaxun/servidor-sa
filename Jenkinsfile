@@ -24,7 +24,58 @@ pipeline
                 {                    
                     sh 'npm install'                
                     sh 'npm start'
+                    sh 'npm test'
                 }
+
+                sh 'forever stopall'                
+
+
+                dir("microservicio-producto") 
+                {                    
+                    sh 'npm install'                
+                    sh 'npm start'
+                    sh 'npm test'
+                }
+
+                sh 'forever stopall'
+                
+
+                dir("microservicio-carrito") 
+                {                    
+                    sh 'npm install'                
+                    sh 'npm start'
+                    sh 'npm test'
+                }
+
+                sh 'forever stopall'                
+
+
+                dir("microservicio-compra") 
+                {                    
+                    sh 'npm install'                
+                    sh 'npm start'
+                    sh 'npm test'
+                }
+
+                sh 'forever stopall'
+
+                dir("microservicio-facturacion") 
+                {                    
+                    sh 'npm install'                
+                    sh 'npm start'
+                    sh 'npm test'
+                }
+
+                sh 'forever stopall'         
+
+                dir("microservicio-subasta") 
+                {                    
+                    sh 'npm install'                
+                    sh 'npm start'
+                    sh 'npm test'
+                }
+
+                sh 'forever stopall'                          
 
                 /*dir("microservicio-producto") 
                 {                    
@@ -63,13 +114,8 @@ pipeline
         {
             steps
             {
-                echo 'Realizando pruebas unitarias servicio '
-                
-                dir("microservicio-usuario")
-                {
-                    sh 'npm test'
-                }
 
+                echo 'Pruebas unitarias'
                 /*dir("microservicio-producto")
                 {
                     sh 'npm test'
@@ -90,7 +136,7 @@ pipeline
                     sh 'npm test'
                 }*/
 
-                sh 'forever stopall'
+                
             }
         }
 
@@ -105,7 +151,7 @@ pipeline
                     sh 'docker build -t image-microservicio-usuario .'                                        
                 }                             
 
-                /*echo 'Creando la imagen docker de microservicio producto'
+                echo 'Creando la imagen docker de microservicio producto'
                 dir("microservicio-producto")
                 {
 
@@ -138,8 +184,7 @@ pipeline
                 {
 
                     sh 'docker build -t image-microservicio-subasta .'
-                }
-                */ 
+                }                
 
                 echo 'Creación de artefactos correcta'
             }
@@ -180,7 +225,7 @@ pipeline
                     echo 'Etiquetando contenedor usuario'
                     sh 'docker tag image-microservicio-usuario:latest gcr.io/practica3-sa/microservicio-usuario-image:latest'
 
-                    /*echo 'Etiquetando contenedor producto'
+                    echo 'Etiquetando contenedor producto'
                     sh 'docker tag image-microservicio-producto:latest gcr.io/practica3-sa/microservicio-producto-image:latest'                    
 
                     echo 'Etiquetando contenedor carrito'
@@ -194,7 +239,7 @@ pipeline
 
                     echo 'Etiquetando contenedor subasta'
                     sh 'docker tag image-microservicio-subasta:latest gcr.io/practica3-sa/microservicio-subasta-image:latest'                                                                       
-                    */
+                    
 
                     echo 'Etiquetando contenedor esb'
                     sh 'docker tag imagen-esb-container:latest gcr.io/practica3-sa/imagen-esb-container:latest'
@@ -205,12 +250,12 @@ pipeline
 
                     sh 'docker push gcr.io/practica3-sa/microservicio-usuario-image:latest'   
                     sh 'docker push gcr.io/practica3-sa/imagen-esb-container:latest'
-                    /*sh 'docker push gcr.io/practica3-sa/microservicio-producto-image:latest' 
+                    sh 'docker push gcr.io/practica3-sa/microservicio-producto-image:latest' 
                     sh 'docker push gcr.io/practica3-sa/microservicio-carrito-image:latest' 
                     sh 'docker push gcr.io/practica3-sa/microservicio-compra-image:latest' 
                     sh 'docker push gcr.io/practica3-sa/microservicio-facturacion-image:latest' 
                     sh 'docker push gcr.io/practica3-sa/microservicio-subasta-image:latest' 
-                    */
+                
                                   
                     echo 'Registro realizado con éxito. '
                 }                                                            
