@@ -203,8 +203,8 @@ pipeline
                     }   
 
                     echo 'Se ha creado correctamente el artefacto esb.jar'                             
-                    sh 'test -f ./mule-ee-distr.zip && echo "Runtime  encontrado" || wget http://s3.amazonaws.com/new-mule-artifacts/mule-ee-distribution-standalone-4.3.0.zip'
-                    sh 'docker build -t imagen-esb-container .'                 
+                    //sh 'test -f ./mule-ee-distr.zip && echo "Runtime  encontrado" || wget http://s3.amazonaws.com/new-mule-artifacts/mule-ee-distribution-standalone-4.3.0.zip'
+                    //sh 'docker build -t imagen-esb-container .'                 
                     echo 'Se ha creado correctamente el artefacto esb imagen'
                 }                
             }
