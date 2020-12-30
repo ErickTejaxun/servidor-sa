@@ -4,7 +4,7 @@ const conn = require('../conexion');
 
 router.get('/', (req, res) => {
     let date_ob = new Date();
-    res.send("Version 0.0.0.xxxxyyyya" );
+    res.send("Version 0.0.0.xxxxyyyyb" );
 });
 
 /*El login se probo en postman con esta cadena --Eliu
@@ -20,7 +20,9 @@ router.post('/login-cliente', (req, res) => {
         if (err) {
             console.log(err)
             console.log("error1")
-            res.send({ auth: false });
+            res.send({ auth: false,
+                        result:  "'status': 'error', 'message': 'Ocurrió un error inesperado.'"
+            });
         } else {
             if (results.length === 1) {
                 //console.log(results[0])
@@ -30,7 +32,10 @@ router.post('/login-cliente', (req, res) => {
                 });
             } else {
                 console.log("error2")
-                res.send({ auth: false });
+                res.send({ 
+                    auth: false,
+                    result:  "'status': 'error','message': 'Las contraseña es incorrecta o el usuario no existe o duplicado'"
+                });
             }
         }
     });
@@ -44,7 +49,9 @@ router.post('/login-proveedor', (req, res) => {
         if (err) {
             console.log(err)
             console.log("error1")
-            res.send({ auth: false });
+            res.send({ auth: false,
+                        result:  "'status': 'error', 'message': 'Ocurrió un error inesperado.'"
+            });
         } else {
             if (results.length === 1) {
                 //console.log(results[0])
@@ -54,7 +61,10 @@ router.post('/login-proveedor', (req, res) => {
                 });
             } else {
                 console.log("error2")
-                res.send({ auth: false });
+                res.send({ 
+                    auth: false,
+                    result:  "'status': 'error','message': 'Las contraseña es incorrecta o el usuario no existe o duplicado'"
+                });
             }
         }
     });
@@ -74,9 +84,11 @@ router.post('/registrar-cliente', (req, res) => {
     console.log(sql);
     let query = conn.query(sql, (err, results) => {
         if (err) {
-            res.send({ auth: false });
+            res.send({ auth: false,
+                        result: "Error inesperado" });
         } else {
-            res.send({ auth: true });
+            res.send({ auth: true,
+                        result: results[0] });
         }
     });
 });
@@ -87,9 +99,11 @@ router.post('/registrar-proveedor', (req, res) => {
     console.log("query "+sql);
     let query = conn.query(sql, (err, results) => {
         if (err) {
-            res.send({ auth: false });
+            res.send({ auth: false,
+                        result: "Error inesperado" });
         } else {
-            res.send({ auth: true });
+            res.send({ auth: true,
+                        result: results[0] });
         }
     });
 });
