@@ -7,8 +7,6 @@ router.get('/', (req, res) => {
     res.send("Version 0.0.0.xxxxyyyya" );
 });
 
-
-
 /*El login se probo en postman con esta cadena --Eliu
 {
     "email":"eder@usac.com",
@@ -72,7 +70,8 @@ router.post('/login-proveedor', (req, res) => {
 }*/
 router.post('/registrar-cliente', (req, res) => {
     const { nombre, apellido, email, contrasena, celular } = req.body;
-    let sql = `select nuevo_usuario('${nombre}','${apellido}','EsCliente','${email}','${contrasena}',${celular},'dirCliente',0)`;
+    let sql = `call nuevo_usuario('${nombre}','${apellido}','EsCliente','${email}','${contrasena}',${celular},'dirCliente',0)`;
+    console.log(sql);
     let query = conn.query(sql, (err, results) => {
         if (err) {
             res.send({ auth: false });
@@ -84,7 +83,7 @@ router.post('/registrar-cliente', (req, res) => {
 
 router.post('/registrar-proveedor', (req, res) => {
     const { nombre, apellido, empresa, email, contrasena, direccion } = req.body;
-    let sql = `select nuevo_usuario('${nombre}','${apellido}','${empresa}','${email}','${contrasena}',0,'${direccion}', 1)`;
+    let sql = `call nuevo_usuario('${nombre}','${apellido}','${empresa}','${email}','${contrasena}',0,'${direccion}', 1)`;
     console.log("query "+sql);
     let query = conn.query(sql, (err, results) => {
         if (err) {
