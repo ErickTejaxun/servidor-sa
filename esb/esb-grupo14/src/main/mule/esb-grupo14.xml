@@ -33,11 +33,6 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		<http:request method="GET" doc:name="Request_ver-productos" doc:id="5614bc40-887a-42d5-8f38-2d0b51c3b286" config-ref="HTTP_Request_configuration_microservicio_usuario" path="/ver-productos"/>
 		<logger level="INFO" doc:name="Logger" doc:id="c77ad2c0-f5cb-4b94-806e-acc340dbe86b" message="Procesando peticion de ver productos"/>
 	</flow>
-	<flow name="esb-grupo14-flow-registrar-usuario" doc:id="ffa5d5a0-cc01-4a6c-b54e-117f0893d360" >
-		<http:listener doc:name="Listener" doc:id="5bff77cc-a7e0-4a8e-b2ae-7d780f243f49" config-ref="HTTP_Listener_config" path="/registrar-clientec"/>
-		<http:request method="POST" doc:name="Request_registrar-cliente" doc:id="ed6514cf-4238-4eff-b773-5f95136a713a" config-ref="HTTP_Request_configuration_microservicio_usuario" path="/registrar-cliente"/>
-		<logger level="INFO" doc:name="Logger" doc:id="fe632ad9-3012-4e3c-a141-837ed37a8d08" message="Procesando peticion de registro de usuario"/>
-	</flow>
 	<flow name="esb-grupo14-flow-ver-producto-por-id" doc:id="932c0c8d-4c0a-4787-945a-7cc7fbc19585" >
 		<http:listener doc:name="Listener_ver-producto-id" doc:id="7180677f-e632-44c3-b451-668b554a8787" config-ref="HTTP_Listener_config" path="/ver-producto?id_producto=val"/>
 		<http:request method="GET" doc:name="Request_ver-producto-id" doc:id="62013edc-3a15-4d0b-af2f-b416fb13cfba" config-ref="HTTP_Request_configuration_microservicio-producto" path="/ver-producto?id_producto=val">
