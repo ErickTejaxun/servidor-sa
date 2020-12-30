@@ -10,7 +10,7 @@ ENV MULE_VERSION=4.2.1
 
 RUN mkdir mulezip 
 RUN ls -la 
-COPY ~/mule-ee-distribution-standalone-4.3.0.zip /mulezip 
+COPY mule-ee-distribution-standalone-4.3.0.zip /mulezip 
 RUN cd /mulezip && ls -la 
 
 RUN cd ../opt && unzip /mulezip/mule-ee-distribution-standalone-4.3.0.zip && ls -la 
