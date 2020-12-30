@@ -60,7 +60,7 @@ router.post('/login-proveedor', (req, res) => {
             if (results.length === 1) {
                 res.send({
                     status: 'success',
-                    data: results,
+                    data: results[0], 
                     message: 'Usuario autenticado de manera exitosa.'
                     
                 });
@@ -102,7 +102,7 @@ router.post('/registrar-cliente', (req, res) => {
            if(cad=='{"1":"1"}'){           
             res.send({ 
                     status: "success",
-                    data: results,
+                    data: results[0], 
                     message: "Usuario creado de manera exitosa."  
              });
             }else if(cad=='{"-1":"-1"}'){
