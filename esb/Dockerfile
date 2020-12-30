@@ -21,7 +21,7 @@ RUN chmod 777 $MULE_HOME/bin/launcher
 
 CMD ["/opt/mule/bin/mule"]
 
-EXPOSE 9082
+EXPOSE 80
 
 COPY ./esb-grupo14/target/esb-grupo14-1.0.0-SNAPSHOT-mule-application.jar ${MULE_HOME}/apps
 
