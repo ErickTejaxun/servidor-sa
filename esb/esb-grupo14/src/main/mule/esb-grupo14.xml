@@ -30,7 +30,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	</flow>
 	<flow name="esb-grupo14-flow-ver-productos" doc:id="ccb18aae-bc42-4b65-89a6-7e6fa1fe62dd" >
 		<http:listener doc:name="Listener_ver-productos" doc:id="4cf5c3fa-b0a8-454b-95b2-d511e45c5ab7" config-ref="HTTP_Listener_config" path="/ver-productos"/>
-		<http:request method="GET" doc:name="Request_ver-productos" doc:id="5614bc40-887a-42d5-8f38-2d0b51c3b286" config-ref="HTTP_Request_configuration_microservicio_usuario" path="/ver-productos"/>
+		<http:request method="GET" doc:name="Request_ver-productos" doc:id="5614bc40-887a-42d5-8f38-2d0b51c3b286" config-ref="HTTP_Request_configuration_microservicio-producto" path="/ver-productos"/>
 		<logger level="INFO" doc:name="Logger" doc:id="c77ad2c0-f5cb-4b94-806e-acc340dbe86b" message="Procesando peticion de ver productos"/>
 	</flow>
 	<flow name="esb-grupo14-flow-ver-producto-por-id" doc:id="932c0c8d-4c0a-4787-945a-7cc7fbc19585" >
