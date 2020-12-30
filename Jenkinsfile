@@ -154,7 +154,7 @@ pipeline
                 {       
                     dir("esb-grupo14")
                     {
-                        sh 'mvn packages'
+                        sh 'mvn package'
                     }   
 
                     echo 'Se ha creado correctamente el artefacto esb.jar'                             
