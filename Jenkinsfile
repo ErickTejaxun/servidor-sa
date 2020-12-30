@@ -68,12 +68,13 @@ pipeline
 
                 sh 'forever stopall'         
 
-                dir("microservicio-subasta") 
+                /*dir("microservicio-subasta") 
                 {                    
                     sh 'npm install'                
                     sh 'npm start'
                     sh 'npm test'
                 }
+                */
 
                 sh 'forever stopall'                          
 
@@ -254,7 +255,7 @@ pipeline
                     sh 'docker push gcr.io/practica3-sa/microservicio-carrito-image:latest' 
                     sh 'docker push gcr.io/practica3-sa/microservicio-compra-image:latest' 
                     sh 'docker push gcr.io/practica3-sa/microservicio-facturacion-image:latest' 
-                    sh 'docker push gcr.io/practica3-sa/microservicio-subasta-image:latest' 
+                    //sh 'docker push gcr.io/practica3-sa/microservicio-subasta-image:latest' 
                 
                                   
                     echo 'Registro realizado con éxito. '
