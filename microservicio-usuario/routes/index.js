@@ -29,7 +29,7 @@ router.post('/login-cliente', (req, res) => {
                 //console.log(results[0])
                 res.send({
                     status: 'success',
-                    data: results,
+                    data: results[0],
                     message: 'Usuario autenticado de manera exitosa.'
                     
                 });
