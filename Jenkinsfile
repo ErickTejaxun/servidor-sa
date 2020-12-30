@@ -25,21 +25,20 @@ pipeline
                     sh 'npm install'                
                     sh 'npm start'
                     sh 'npm test'
-                }
-
+                }                
                 sh 'forever stopall'                
 
-
+                sh 'sleep 3'                
                 dir("microservicio-producto") 
                 {                    
                     sh 'npm install'                
                     sh 'npm start'
                     sh 'npm test'
                 }
-
+    
                 sh 'forever stopall'
-                
 
+                sh 'sleep 3'
                 dir("microservicio-carrito") 
                 {                    
                     sh 'npm install'                
@@ -49,7 +48,7 @@ pipeline
 
                 sh 'forever stopall'                
 
-
+                sh 'sleep 3'
                 dir("microservicio-compra") 
                 {                    
                     sh 'npm install'                
@@ -58,7 +57,7 @@ pipeline
                 }
 
                 sh 'forever stopall'
-
+                sh 'sleep 3'
                 dir("microservicio-facturacion") 
                 {                    
                     sh 'npm install'                
@@ -67,14 +66,14 @@ pipeline
                 }
 
                 sh 'forever stopall'         
-
-                /*dir("microservicio-subasta") 
+                sh 'sleep 3'
+                dir("microservicio-subasta") 
                 {                    
                     sh 'npm install'                
                     sh 'npm start'
                     sh 'npm test'
                 }
-                */
+                
 
                 sh 'forever stopall'                          
 
