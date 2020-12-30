@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 }*/
 router.post('/login-cliente', (req, res) => {
     const { email, contrasena } = req.body;
-    const sql = `SELECT * FROM Usuario WHERE email='${email}' AND contrasena='${contrasena}'`;
+    const sql = `select Id_Usuario as id, nombre, apellido, email, contrasena, celular FROM Usuario WHERE email='${email}' AND contrasena='${contrasena}'`;
     console.log(sql);
     const query = conn.query(sql, (err, results) => {
         if (err) {
@@ -46,7 +46,7 @@ router.post('/login-cliente', (req, res) => {
 
 router.post('/login-proveedor', (req, res) => {
     const { email, contrasena } = req.body;
-    const sql = `SELECT * FROM Usuario WHERE email='${email}' AND contrasena='${contrasena}'`;
+    const sql = `select Id_Usuario as id, nombre, apellido,empresa, email, contrasena, direccion WHERE email='${email}' AND contrasena='${contrasena}'`;
     console.log(sql);
     const query = conn.query(sql, (err, results) => {
         if (err) {
