@@ -176,11 +176,16 @@ pipeline
                     echo 'Etiquetando contenedor subasta'
                     sh 'docker tag image-microservicio-subasta:latest gcr.io/practica3-sa/microservicio-subasta-image:latest'                                                                       
                     */
+
+                    echo 'Etiquetando contenedor esb'
+                    sh 'docker tag imagen-esb-container:latest gcr.io/practica3-sa/imagen-esb-container:latest'
+
                     echo 'Nos logeamos para poder enviar nuestros contenedores en container register'
                     sh 'docker login -u _json_key -p "$(cat /home/g2616501300304/keyfile.json)" https://gcr.io'
                     //sh 'docker login -u 1013130968812-compute@developer.gserviceaccount.com-p "$(cat /home/g2616501300304/keyfile.json)" https://gcr.io'
 
                     sh 'docker push gcr.io/practica3-sa/microservicio-usuario-image:latest'   
+                    sh 'docker push gcr.io/practica3-sa/imagen-esb-container:latest'
                     /*sh 'docker push gcr.io/practica3-sa/microservicio-producto-image:latest' 
                     sh 'docker push gcr.io/practica3-sa/microservicio-carrito-image:latest' 
                     sh 'docker push gcr.io/practica3-sa/microservicio-compra-image:latest' 
@@ -231,6 +236,26 @@ pipeline
 
             }
         }   
+
+        stage("Gestionando el esb")
+        {
+            steps
+            {
+                echo 'Creando artefacto java Mule esb'                
+                dir("esb") 
+                {       
+                    dir("esb-grupo14")
+                    {
+                        sh 'mvn packages'
+                    }   
+
+                    echo 'Se ha creado correctamente el artefacto esb.jar'                             
+
+                    sh 'docker build -t imagen-esb-container .'                 
+                    echo 'Se ha creado correctamente el artefacto esb imagen'
+                }                
+            }
+        }
 
         stage("Despliegue del sistema ")
         {
