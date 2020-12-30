@@ -32,7 +32,7 @@
 				<extensions>true</extensions>
 				<configuration>
 				</configuration>
-            </plugin>          
+			</plugin>
 		</plugins>
 	</build>
 

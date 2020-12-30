@@ -5,7 +5,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="e8986d1c-e208-408b-9520-b1705d0e3e05">
-		<http:listener-connection host="0.0.0.0" port="8080" />
+		<http:listener-connection host="localhost" port="8080" />
 	</http:listener-config>
 	<http:request-config name="HTTP_Request_configuration_microservicio_usuario" doc:name="HTTP Request configuration" doc:id="f9e047aa-cf7f-4b80-9c84-c6391da658d1">
 		<http:request-connection host="34.106.222.204" port="80" />
@@ -16,22 +16,27 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	<flow name="esb-grupo14-flow-login-proveedor" doc:id="c8b50be7-b28c-4902-a98b-1350f4fc0c3c" >
 		<http:listener doc:name="listener_login-proveedor" doc:id="3c359ebd-5b17-45c3-a58a-50c4b140ac34" config-ref="HTTP_Listener_config" path="/login-proveedor"/>
 		<http:request method="POST" doc:name="Request_login-usuario" doc:id="7077da63-8436-4f25-b35f-e3c968f32522" config-ref="HTTP_Request_configuration_microservicio_usuario" path="/login-proveedor" />
-		<logger level="INFO" doc:name="Logger" doc:id="a8c4ba01-077a-4617-b0ff-443e5370b3a2" />
+		<logger level="INFO" doc:name="Logger" doc:id="a8c4ba01-077a-4617-b0ff-443e5370b3a2" message="Se ha loggeando un proveedor"/>
 	</flow>
 	<flow name="esb-grupo14-flow-login-usuario" doc:id="81ce8e8a-6b63-4c60-8a73-89e02e76ad8d" >
 		<http:listener doc:name="listener_login_usuario" doc:id="d8221164-3804-41d2-b6b8-8d8e878ec824" config-ref="HTTP_Listener_config" path="/login-cliente" outputMimeType="application/json"/>
 		<http:request method="POST" doc:name="Request_login-usuario" doc:id="f13179eb-c25b-46ce-a4c8-ceb04daecd00" config-ref="HTTP_Request_configuration_microservicio_usuario" path="/login-cliente"/>
-		<logger level="INFO" doc:name="Logger" doc:id="8722629f-c3aa-4579-858f-948ba4b34b8c" message="Procesando peticion de logeo"/>
+		<logger level="INFO" doc:name="Logger" doc:id="8722629f-c3aa-4579-858f-948ba4b34b8c" message="Procesando peticion de login para cliente"/>
 	</flow>
 	<flow name="esb-grupo14-flow-registrar-cliente" doc:id="ed9515e8-6e73-4782-88b1-f1ceaf2d67c8" >
 		<http:listener doc:name="listener_registrar-cliente" doc:id="397d1071-e413-4102-8ce4-d9e48967ab76" config-ref="HTTP_Listener_config" path="/registrar-cliente" />
 		<http:request method="POST" doc:name="Request_registrar-cliente" doc:id="4ba5a9cf-78f0-4604-a600-32431b2027d3" config-ref="HTTP_Request_configuration_microservicio_usuario" path="/registrar-cliente" />
-		<logger level="INFO" doc:name="Logger" doc:id="7eccde7b-9aef-48d4-a82c-74239e01d347" />
+		<logger level="INFO" doc:name="Logger" doc:id="7eccde7b-9aef-48d4-a82c-74239e01d347" message="Procesando petitcion de registro de cliente"/>
 	</flow>
 	<flow name="esb-grupo14-flow-ver-productos" doc:id="ccb18aae-bc42-4b65-89a6-7e6fa1fe62dd" >
 		<http:listener doc:name="Listener_ver-productos" doc:id="4cf5c3fa-b0a8-454b-95b2-d511e45c5ab7" config-ref="HTTP_Listener_config" path="/ver-productos"/>
-		<http:request method="GET" doc:name="Request_ver-productos" doc:id="5614bc40-887a-42d5-8f38-2d0b51c3b286" config-ref="HTTP_Request_configuration_microservicio-producto" path="/ver-productos"/>
-		<logger level="INFO" doc:name="Logger" doc:id="c77ad2c0-f5cb-4b94-806e-acc340dbe86b" message="Respuesta de productos hacia el host: "/>
+		<http:request method="GET" doc:name="Request_ver-productos" doc:id="5614bc40-887a-42d5-8f38-2d0b51c3b286" config-ref="HTTP_Request_configuration_microservicio_usuario" path="/ver-productos"/>
+		<logger level="INFO" doc:name="Logger" doc:id="c77ad2c0-f5cb-4b94-806e-acc340dbe86b" message="Procesando peticion de ver productos"/>
+	</flow>
+	<flow name="esb-grupo14-flow-registrar-usuario" doc:id="ffa5d5a0-cc01-4a6c-b54e-117f0893d360" >
+		<http:listener doc:name="Listener" doc:id="5bff77cc-a7e0-4a8e-b2ae-7d780f243f49" config-ref="HTTP_Listener_config" path="/registrar-cliente"/>
+		<http:request method="POST" doc:name="Request_registrar-cliente" doc:id="ed6514cf-4238-4eff-b773-5f95136a713a" config-ref="HTTP_Request_configuration_microservicio_usuario" path="/registrar-cliente"/>
+		<logger level="INFO" doc:name="Logger" doc:id="fe632ad9-3012-4e3c-a141-837ed37a8d08" message="Procesando peticion de registro de usuario"/>
 	</flow>
 	<flow name="esb-grupo14-flow-ver-producto-por-id" doc:id="932c0c8d-4c0a-4787-945a-7cc7fbc19585" >
 		<http:listener doc:name="Listener_ver-producto-id" doc:id="7180677f-e632-44c3-b451-668b554a8787" config-ref="HTTP_Listener_config" path="/ver-producto?id_producto=val"/>
@@ -42,10 +47,26 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	id_producto : 1
 }]]]></http:query-params>
 		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="a165bcf8-d98a-42b2-89e6-db21426c9894" message="Procesando peticion de producto por id"/>
+	</flow>
+	<flow name="esb-grupo14-flow-crear-producto-proveedor" doc:id="250232a7-5ef2-452c-8450-a7580105f4ed" >
+		<http:listener doc:name="Listener_crear-producto-proveedor" doc:id="d8aa7ed6-11d2-4648-8629-f034e5cffc3a" config-ref="HTTP_Listener_config" path="/crear-producto-proveedor"/>
+		<http:request method="POST" doc:name="Request_crear-producto-proveedor" doc:id="0e0952eb-8f1d-478b-9afe-daf4d8c6f464" config-ref="HTTP_Request_configuration_microservicio-producto" path="/crear-producto-proveedor"/>
+		<logger level="INFO" doc:name="Logger" doc:id="643f5c73-6e60-426f-8491-9835a2e86c3d" message="Procesando peticion de crear producto de proveedor"/>
+	</flow>
+	<flow name="esb-grupo14-flow-realizar-compra" doc:id="014cc40e-3e0b-41b9-b529-5531aed3bc38" >
+		<http:listener doc:name="Listener_realizar-compra" doc:id="89b70546-e2ac-42c3-810b-76c7b02d5e5d" config-ref="HTTP_Listener_config" path="/realizar-compra"/>
+		<http:request method="POST" doc:name="Request_realizar-compra" doc:id="bda9b4a8-631b-4cc1-a6f8-9db5b4a8006a" config-ref="HTTP_Request_configuration_microservicio-producto" path="/realizar-compra"/>
+		<logger level="INFO" doc:name="Logger" doc:id="ae9c0d97-5e7f-43bc-b25f-9e123c865a35" message="Procesando peticion de realizar compra"/>
+	</flow>
+	<flow name="esb-grupo14-flow-crear-producto-cliente" doc:id="275bf087-0f0e-4ead-afba-749493eb64c9" >
+		<http:listener doc:name="Listener_crear-producto-cliente" doc:id="756ac194-1bcf-4a3e-96b6-768fbb168e30" config-ref="HTTP_Listener_config" path="/crear-producto-cliente"/>
+		<http:request method="POST" doc:name="Request_crear-producto-cliente" doc:id="b50681ec-7705-4b0f-8ab2-6d9f331d3509" config-ref="HTTP_Request_configuration_microservicio-producto" path="/crear-producto-cliente"/>
+		<logger level="INFO" doc:name="Logger" doc:id="1b42392e-299a-44e7-9e92-5c4865ad1450" message="Procesando peticion de creacion de producto por cliente"/>
 	</flow>
 	<flow name="esb-grupo14-flow-registrar-proveedor" doc:id="dab2082b-7e39-43e6-b33c-20195fc922dd" >
 		<http:listener doc:name="listener_registrar-proveedor" doc:id="dac812ca-ed43-4aca-8ae1-59abdc79098c" config-ref="HTTP_Listener_config" path="/registrar-proveedor" />
 		<http:request method="POST" doc:name="Request_registrar-proveedor" doc:id="1a7f05e8-5d65-43f5-ab3b-bd8b5fd9be6e" config-ref="HTTP_Request_configuration_microservicio_usuario" path="/registrar-proveedor" />
-		<logger level="INFO" doc:name="Logger" doc:id="4e738df3-0a56-46f2-8f32-4ae90a8c7063" />
+		<logger level="INFO" doc:name="Logger" doc:id="4e738df3-0a56-46f2-8f32-4ae90a8c7063" message="Procesando peticion de registro de proveedor"/>
 	</flow>
 </mule>
