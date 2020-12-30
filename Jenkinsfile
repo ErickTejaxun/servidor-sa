@@ -24,7 +24,7 @@ pipeline
                 {                    
                     sh 'npm install'                
                     sh 'npm start'
-                    sh 'npm test'
+                    //sh 'npm test'
                 }                
                 sh 'forever stopall'                
 
@@ -33,7 +33,7 @@ pipeline
                 {                    
                     sh 'npm install'                
                     sh 'npm start'
-                    sh 'npm test'
+                    //sh 'npm test'
                 }
     
                 sh 'forever stopall'
@@ -43,7 +43,7 @@ pipeline
                 {                    
                     sh 'npm install'                
                     sh 'npm start'
-                    sh 'npm test'
+                    //sh 'npm test'
                 }
 
                 sh 'forever stopall'                
@@ -53,7 +53,7 @@ pipeline
                 {                    
                     sh 'npm install'                
                     sh 'npm start'
-                    sh 'npm test'
+                    //sh 'npm test'
                 }
 
                 sh 'forever stopall'
@@ -62,7 +62,7 @@ pipeline
                 {                    
                     sh 'npm install'                
                     sh 'npm start'
-                    sh 'npm test'
+                    //sh 'npm test'
                 }
 
                 sh 'forever stopall'         
@@ -71,7 +71,7 @@ pipeline
                 {                    
                     sh 'npm install'                
                     sh 'npm start'
-                    sh 'npm test'
+                    //sh 'npm test'
                 }
                 
 
