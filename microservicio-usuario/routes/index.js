@@ -20,21 +20,24 @@ router.post('/login-cliente', (req, res) => {
         if (err) {
             console.log(err)
             console.log("error1")
-            res.send({ auth: false,
-                        result:  "'status': 'error', 'message': 'Ocurrió un error inesperado.'"
+            res.send({            
+                status: "error",
+                message: "Ocurrió un error inesperado."
             });
         } else {
             if (results.length === 1) {
                 //console.log(results[0])
                 res.send({
-                    auth: true,
-                    result: results[0]
+                    status: 'success',
+                    data: results,
+                    message: 'Usuario autenticado de manera exitosa.'
+                    
                 });
             } else {
                 console.log("error2")
                 res.send({ 
-                    auth: false,
-                    result:  "'status': 'error','message': 'Las contraseña es incorrecta o el usuario no existe o duplicado'"
+                    status: "error",
+                    message: "Las contraseña es incorrecta o el usuario no existe."
                 });
             }
         }
@@ -49,15 +52,17 @@ router.post('/login-proveedor', (req, res) => {
         if (err) {
             console.log(err)
             console.log("error1")
-            res.send({ auth: false,
-                        result:  "'status': 'error', 'message': 'Ocurrió un error inesperado.'"
+            res.send({ 
+                status: "error",
+                message: "Ocurrió un error inesperado."
             });
         } else {
             if (results.length === 1) {
-                //console.log(results[0])
                 res.send({
-                    auth: true,
-                    result: results[0]
+                    status: 'success',
+                    data: results,
+                    message: 'Usuario autenticado de manera exitosa.'
+                    
                 });
             } else {
                 console.log("error2")
@@ -85,10 +90,28 @@ router.post('/registrar-cliente', (req, res) => {
     let query = conn.query(sql, (err, results) => {
         if (err) {
             res.send({ auth: false,
-                        result: "Error inesperado" });
+                status: "error",
+                message: "Ocurrió un error inesperado."
+                    
+                    });
         } else {
-            res.send({ auth: true,
-                        result: results[0] });
+            var primero = results[0];
+            console.log("resultado "+JSON.stringify(primero[0]));
+            var cad = JSON.stringify(primero[0]);
+
+           if(cad=='{"1":"1"}'){           
+            res.send({ 
+                    status: "success",
+                    data: results,
+                    message: "Usuario creado de manera exitosa."  
+             });
+            }else if(cad=='{"-1":"-1"}'){
+                res.send({ 
+                    status: "error",
+                    message: "Ya existe un usuario registrado con ese correo electrónico."
+                    
+                 });
+                }
         }
     });
 });
@@ -100,10 +123,28 @@ router.post('/registrar-proveedor', (req, res) => {
     let query = conn.query(sql, (err, results) => {
         if (err) {
             res.send({ auth: false,
-                        result: "Error inesperado" });
+                status: "error",
+                message: "Ocurrió un error inesperado."
+                    
+                    });
         } else {
-            res.send({ auth: true,
-                        result: results[0] });
+            var primero = results[0];
+            console.log("resultado "+JSON.stringify(primero[0]));
+            var cad = JSON.stringify(primero[0]);
+
+           if(cad=='{"1":"1"}'){           
+            res.send({ 
+                    status: "success",
+                    data: results,
+                    message: "Usuario creado de manera exitosa."  
+             });
+            }else if(cad=='{"-1":"-1"}'){
+                res.send({ 
+                    status: "error",
+                    message: "Ya existe un usuario registrado con ese correo electrónico."
+                    
+                 });
+                }
         }
     });
 });
